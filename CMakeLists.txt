@@ -9,6 +9,11 @@ find_package(Qt5Qml REQUIRED)
 find_package(Qt5Quick REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 
-add_executable(huginn main.cpp)
+QT5_ADD_RESOURCES (Resources qml.qrc)
 
-target_link_libraries(huginn Qt5::Widgets Qt5::Quick Qt5::Widgets)
+add_executable(huginn ${Resources}
+                      main.cpp)
+
+target_link_libraries(huginn Qt5::Widgets
+                             Qt5::Quick
+                             Qt5::Widgets)
