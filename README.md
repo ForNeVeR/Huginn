@@ -6,9 +6,9 @@ Build
 -----
 Huginn build is based on `cmake` system. Here's how you can prepare the build:
 
-	$ mkdir build
+    $ mkdir build
     $ cd build
-	$ cmake ..
+    $ cmake ..
 
 If you haven't your environment set properly, you will probably need to set the
 `CMAKE_PREFIX_PATH`. See files `tools/Cmake-Windows.ps1.example` and
