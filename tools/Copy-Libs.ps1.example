@@ -1,0 +1,62 @@
+# Change these variables and rename this file to Copy-Libs.ps1. Execute it
+# before running the executable to copy Qt DLLs to output directories.
+$qtDirectory = 'C:\Qt\5.3\msvc2013_64'
+
+# You probably won't want to change this.
+$buildDirectory = "$PSScriptRoot\..\build"
+
+# You definitely won't want to change this.
+$libraries = @(
+	'bin\icudt52'
+	'bin\icuin52'
+	'bin\icuuc52'
+	'bin\libEGL'
+	'bin\libGLESv2'
+	'bin\Qt5Core'
+	'bin\Qt5Gui'
+	'bin\Qt5Network'
+	'bin\Qt5Qml'
+	'bin\Qt5Quick'
+	'bin\Qt5Widgets'
+	'plugins\platforms\qwindows'
+)
+
+$directoryMapping = @{
+	'bin' = ''
+	'plugins\platforms' = 'plugins\platforms'
+}
+
+function Create-Directory($path) {
+	if (-not (Test-Path $path)) {
+		New-Item -Type Directory $path
+	}
+}
+
+function Copy-Library($name, $target) {
+	$dll = "$qtDirectory\$name.dll"
+	$pdb = "$qtDirectory\$name.pdb"
+
+	$sourceDirectory = Split-Path $name
+	$targetDirectory = "$buildDirectory\$target\$($directoryMapping[$sourceDirectory])"
+	if (-not (Test-Path $targetDirectory)) {
+		Create-Directory $targetDirectory
+	}
+
+	Copy-Item $dll $targetDirectory
+	if (Test-Path $pdb) {
+		Copy-Item $pdb $targetDirectory
+	}
+}
+
+Create-Directory $buildDirectory\Release
+Create-Directory $buildDirectory\Debug
+
+$libraries | % {
+	Copy-Library $_ 'Release'
+
+	if (Test-Path "$qtDirectory\${_}d.dll") {
+		Copy-Library "${_}d" 'Debug'
+	} else {
+		Copy-Library $_ 'Debug'
+	}
+}

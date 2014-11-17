@@ -1,0 +1,17 @@
+# Change these variables and rename this file to Build-Win32.ps1
+$qtDirectory = 'C:\Qt\5.3\msvc2013_64'
+$generator = 'Visual Studio 12 2013 Win64'
+
+# You probably won't want to change this.
+$buildDirectory = "$PSScriptRoot\..\build"
+
+if (-not (Test-Path $buildDirectory)) {
+	New-Item -Type Directory $buildDirectory
+}
+
+Push-Location $buildDirectory
+
+$env:CMAKE_PREFIX_PATH = $qtDirectory
+cmake -G $generator ..
+
+Pop-Location
