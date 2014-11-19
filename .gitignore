@@ -1,3 +1,4 @@
 /build/
 /tools/Cmake-Windows.ps1
 /tools/Copy-Libs.ps1
+/*.user
