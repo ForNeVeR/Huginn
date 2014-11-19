@@ -1,11 +1,12 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
+import QtQuick.Layouts 1.1
 
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("Huginn")
 
     menuBar: MenuBar {
         Menu {
@@ -21,8 +22,17 @@ ApplicationWindow {
         }
     }
 
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    RowLayout {
+        anchors.fill: parent
+
+        ListView {
+            Layout.preferredWidth: 250
+            Layout.fillHeight: true
+        }
+
+        TextArea {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
 }
