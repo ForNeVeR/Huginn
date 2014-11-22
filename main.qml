@@ -1,12 +1,17 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.2
 import QtQuick.Layouts 1.1
+import Huginn 1.0
 
 ApplicationWindow {
+    MainWindowModel {
+        id: model
+    }
+
     visible: true
     width: 640
     height: 480
-    title: qsTr("Huginn")
+    title: model.text
 
     menuBar: MenuBar {
         Menu {

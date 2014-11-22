@@ -12,6 +12,7 @@ find_package(Qt5Widgets REQUIRED)
 QT5_ADD_RESOURCES (Resources qml.qrc)
 
 add_executable(huginn WIN32 ${Resources}
+                            mainwindowmodel.cpp
                             main.cpp)
 
 target_link_libraries(huginn Qt5::Widgets
