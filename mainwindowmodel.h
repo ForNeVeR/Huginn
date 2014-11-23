@@ -6,14 +6,22 @@
 class MainWindowModel : public QObject
 {
     Q_OBJECT
+
 public:
     explicit MainWindowModel(QObject *parent = 0);
 
-    Q_PROPERTY(QString text READ text)
+    Q_PROPERTY(QString directory READ directory WRITE setDirectory NOTIFY directoryChanged)
+    QString directory();
 
-    QString text();
+    Q_INVOKABLE void changeDirectory();
+
+private:
+    QString _directory;
+
+    void setDirectory(QString directory);
 
 signals:
+    void directoryChanged();
 
 public slots:
 

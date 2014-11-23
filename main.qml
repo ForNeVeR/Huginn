@@ -11,14 +11,14 @@ ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: model.text
+    title: model.directory
 
     menuBar: MenuBar {
         Menu {
             title: qsTr("File")
             MenuItem {
                 text: qsTr("&Open")
-                onTriggered: console.log("Open action triggered");
+                onTriggered: model.changeDirectory();
             }
             MenuItem {
                 text: qsTr("Exit")
